@@ -26,9 +26,17 @@ public class Block : MonoBehaviour
     public BlockColor Color { get; private set; }
     private Vector3 TargetPosition;
 
+    private BlocksConnection BlocksConnection;
+
+    public bool IsConnected;
+
+    SpriteRenderer renderer;
+
     private void Awake()
     {
         Board = FindObjectOfType<Board>();
+        renderer = GetComponent<SpriteRenderer>();
+        BlocksConnection = FindObjectOfType<BlocksConnection>();
     }
     void Start()
     {
@@ -41,8 +49,30 @@ public class Block : MonoBehaviour
 
     void Update()
     {
+        UpdatePosition();
+        UpdateScale();
+        UpdateColor();
+    }
+
+    private void UpdateColor()
+    {
+        var targetColor = IsConnected ? new Color(1f, 1f, 1f, 0.8f) : UnityEngine.Color.white;
+
+        renderer.color = UnityEngine.Color.Lerp(renderer.color, targetColor, Time.deltaTime * 5f);
+    }
+
+    private void UpdateScale()
+    {
+        var targetScale = IsConnected ? 0.8f : 1f;
+        targetScale *= Board.BlockSize;
+        transform.localScale = Vector3.Lerp(transform.localScale, targetScale * Vector3.one, Time.deltaTime * 5f);
+    }
+
+    private void UpdatePosition()
+    {
         transform.localPosition = Vector3.Lerp(transform.localPosition, TargetPosition, Time.deltaTime * 5f);
     }
+
     public static BlockColor GetRandomColor()
     {
         var values = System.Enum.GetValues(typeof(BlockColor));
@@ -60,5 +90,18 @@ public class Block : MonoBehaviour
         X = x;
         Y = y;
         TargetPosition = Board.GetBlockPosition(x, y);
+        IsConnected = false;
+    }
+    private void OnMouseDown()
+    {
+        BlocksConnection.StartConnection(this);
+    }
+    private void OnMouseUp()
+    {
+        BlocksConnection.FinishConnection();
+    }
+    private void OnMouseEnter()
+    {
+        BlocksConnection.Connect(this);
     }
 }
