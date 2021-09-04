@@ -94,13 +94,14 @@ public class Block : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        BlocksConnection.StartConnection(this);
+        ConnectBlock();
     }
-    private void OnMouseUp()
-    {
-        BlocksConnection.FinishConnection();
-    }
+    
     private void OnMouseEnter()
+    {
+        ConnectBlock();
+    }
+    private void ConnectBlock()
     {
         BlocksConnection.Connect(this);
     }

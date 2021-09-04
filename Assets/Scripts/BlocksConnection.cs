@@ -1,12 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BlocksConnection : MonoBehaviour
 {
     List<Block> ConnectedBlocks = new List<Block>();
-    bool IsConnecting = false;
+    private LineRenderer LineRenderer;
+    private Board Board;
 
+    private void Awake()
+    {
+        LineRenderer = GetComponent<LineRenderer>();
+        Board = GetComponent<Board>();
+    }
     void Start()
     {
         
@@ -15,26 +22,36 @@ public class BlocksConnection : MonoBehaviour
     
     void Update()
     {
-        
+        if (Input.GetMouseButtonUp(0))
+            FinishConnection();
+
     }
 
-    public void StartConnection(Block block)
-    {
-        IsConnecting = true;
-    }
+    
     public void Connect(Block block)
     {
-        if (IsConnecting == false)
+        if (!Input.GetMouseButton(0))
             return;
         if (ConnectedBlocks.Contains(block))
             return;
         block.IsConnected = true;
         ConnectedBlocks.Add(block);
+        RefreshConnector();
     }
-    public void FinishConnection()
+    private void FinishConnection()
     {
         ConnectedBlocks.ForEach(block => block.IsConnected = false);
         ConnectedBlocks.Clear();
-        IsConnecting = false;
+        RefreshConnector();
+        
+    }
+    private void RefreshConnector()
+    {
+        var points = ConnectedBlocks
+            .Select(block => Board.GetBlockPosition(block.X, block.Y))
+            .Select(pos => (Vector3)pos + Vector3.back * 2f)
+            .ToArray();
+        LineRenderer.positionCount = points.Length;
+        LineRenderer.SetPositions(points);
     }
 }
