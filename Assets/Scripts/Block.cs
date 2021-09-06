@@ -92,6 +92,12 @@ public class Block : MonoBehaviour
         TargetPosition = Board.GetBlockPosition(x, y);
         IsConnected = false;
     }
+    public void PlaceOnTargetPosition()
+    {
+        transform.localPosition = TargetPosition;
+        transform.localScale = Vector3.zero;
+        renderer.color = new Color(1f, 1f, 1f, 0f);
+    }
     private void OnMouseDown()
     {
         ConnectBlock();

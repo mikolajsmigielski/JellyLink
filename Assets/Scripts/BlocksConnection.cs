@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class BlocksConnection : MonoBehaviour
     private BlockColor? CurrentColor;
     private LineRenderer LineRenderer;
     private Board Board;
+
+    public event Action<int> OnConection;
 
     private void Awake()
     {
@@ -50,7 +53,15 @@ public class BlocksConnection : MonoBehaviour
     private void FinishConnection()
     {
         ConnectedBlocks.ForEach(block => block.IsConnected = false);
-        ConnectedBlocks.ForEach(block => block.resetColor());
+        
+        if (ConnectedBlocks.Count >= 3)
+        {
+            if (OnConection != null)
+                OnConection.Invoke(ConnectedBlocks.Count);
+            Board.RemoveBlock(ConnectedBlocks);
+            Board.RefreshBlocks();
+        }
+        
         ConnectedBlocks.Clear();
         CurrentColor = null;
         RefreshConnector();
