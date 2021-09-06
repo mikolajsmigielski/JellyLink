@@ -105,4 +105,17 @@ public class Block : MonoBehaviour
     {
         BlocksConnection.Connect(this);
     }
+    public bool IsNeighbour(Block other)
+    {
+        if (Mathf.Abs(X - other.X) > 1f)
+            return false;
+        if (Mathf.Abs(Y - other.Y) > 1f)
+            return false;
+        return true;
+    }
+    public void resetColor()
+    {
+        Color = GetRandomColor();
+        SetSprite();
+    }
 }

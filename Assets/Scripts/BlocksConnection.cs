@@ -6,6 +6,7 @@ using UnityEngine;
 public class BlocksConnection : MonoBehaviour
 {
     List<Block> ConnectedBlocks = new List<Block>();
+    private BlockColor? CurrentColor;
     private LineRenderer LineRenderer;
     private Board Board;
 
@@ -34,6 +35,14 @@ public class BlocksConnection : MonoBehaviour
             return;
         if (ConnectedBlocks.Contains(block))
             return;
+        if (!CurrentColor.HasValue)
+            CurrentColor = block.Color;
+
+        if (CurrentColor != block.Color)
+            return;
+
+        if (ConnectedBlocks.Count() >= 1 && !ConnectedBlocks.Last().IsNeighbour(block))
+            return;
         block.IsConnected = true;
         ConnectedBlocks.Add(block);
         RefreshConnector();
@@ -41,7 +50,9 @@ public class BlocksConnection : MonoBehaviour
     private void FinishConnection()
     {
         ConnectedBlocks.ForEach(block => block.IsConnected = false);
+        ConnectedBlocks.ForEach(block => block.resetColor());
         ConnectedBlocks.Clear();
+        CurrentColor = null;
         RefreshConnector();
         
     }
