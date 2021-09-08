@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1431769741067520610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1431769741067520636}
+  - component: {fileID: 1431769741067520637}
+  m_Layer: 0
+  m_Name: Numbers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1431769741067520636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431769741067520610}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5, y: 4.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1431769741067520637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431769741067520610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26868a2d45d63841afc84492d57189c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sprites:
+  - {fileID: 21300000, guid: c936b4a72ac8add46bf4a446c5dc996b, type: 3}
+  - {fileID: 21300000, guid: 23a4a5140f9694b43904935348ccb0f4, type: 3}
+  - {fileID: 21300000, guid: b921b7673a71a7f4ebd7ce444203135b, type: 3}
+  - {fileID: 21300000, guid: 95d4404d37613f04f8b284381fc7f139, type: 3}
+  - {fileID: 21300000, guid: 24a7d82b3221b90458d8ff83dac2b77d, type: 3}
+  - {fileID: 21300000, guid: fd82aec6c6910924d8da216a2c1e3534, type: 3}
+  - {fileID: 21300000, guid: 1b2ecb31db7291348b031f6be4fab606, type: 3}
+  - {fileID: 21300000, guid: c0e71b321b1061f4491119ef1ee960fa, type: 3}
+  - {fileID: 21300000, guid: 7e840b677a56ef1409c4303c947c05d3, type: 3}
+  - {fileID: 21300000, guid: 1063a7762f3d5d7449ed24ae25ef7ed9, type: 3}
+  GridSize: 1
+  TextDirection: 0
