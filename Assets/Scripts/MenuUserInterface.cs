@@ -19,6 +19,7 @@ public class MenuUserInterface : MonoBehaviour
     
     public void LoadGame()
     {
-        SceneManager.LoadScene(ScaneName.SampleScene);
+        FindObjectOfType<SceneChanger>().ChangeScene(ScaneName.SampleScene);
+        
     }
 }

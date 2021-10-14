@@ -40,14 +40,17 @@ public class Numbers : MonoBehaviour
     private void RefreshNumbers()
     {
         RemoveDigits();
+        
+        var digits = Value
+            .ToString()
+            .Select(c => c.ToString())
+            .ToArray();
 
-        var digits = Value.ToString().Select(c => int.Parse(c.ToString())).ToArray();
-
-        for(int i = 0; i < digits.Count(); i++)
+        for (int i = 0; i < digits.Count(); i++)
         {
             var position = CalculatePosition(i,digits.Count());
             
-            var digit = CreateDigit(position, digits[i]);
+            var digit = CreateDigit(position, int.Parse(digits[i]));
             DigitsObjects.Add(digit);
         }
     }
